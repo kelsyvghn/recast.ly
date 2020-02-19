@@ -1,19 +1,39 @@
 // var videos = exampleVideoData
 import VideoListEntry from './VideoListEntry.js';
-import exampleVideoData from '/src/data/exampleVideoData.js';
-const videos = exampleVideoData;
-const listVideos = videos.map((video) =>
+// import exampleVideoData from '/src/data/exampleVideoData.js';
+// const videos = exampleVideoData;
+// const listVideos = videos.map((video) =>
 
-  <h5>  <VideoListEntry image= {video.snippet.thumbnails.default.url} title= {video.snippet.title} description= {video.snippet.description} /></h5>
-);
+//   <h5>  <VideoListEntry image={video.snippet.thumbnails.default.url} title={video.snippet.title} description={video.snippet.description} /></h5>
+// );
 
-var VideoList = () => (
-  <div className="video-list">
-    <div>
-      {listVideos}</div>
+// var VideoList = () => (
+//   <div className="video-list">
+//     <div>
+//       {listVideos}</div>
 
-  </div>
-);
+//   </div>
+// );
+
+class VideoList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.listVideos = props.videos.map((video) =>
+      <h5 onClick={props.handleClick}> <VideoListEntry image={video.snippet.thumbnails.default.url} title={video.snippet.title} description={video.snippet.description} /></h5>
+    );
+  }
+
+  render() {
+    return (
+      <div className="video-list">
+        <div>
+          {this.listVideos}</div>
+      </div>
+    );
+  }
+
+
+}
 
 // PropTypes tell other developers what `props` a component expects
 // Warnings will be shown in the console when the defined rules are violated

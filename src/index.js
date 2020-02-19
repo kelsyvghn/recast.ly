@@ -6,7 +6,6 @@ import App from './components/App.js';
 ReactDOM.render(< App />, document.getElementById('app'));
 
 
-
 //You're going to use the sample data in src/data/exampleVideoData.js to build out the stateless functional VideoList and VideoListEntry components.
 
 /*  Include src/data/exampleVideoData.js in index.html so it can be used by your React components

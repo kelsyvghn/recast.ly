@@ -2,63 +2,51 @@ import VideoPlayer from './VideoPlayer.js';
 import VideoListEntry from './VideoListEntry.js';
 import Search from './Search.js';
 import VideoList from './VideoList.js';
-// import exampleVideoData from '/src/data/exampleVideoData.js';
+import exampleVideoData from '/src/data/exampleVideoData.js';
 
-var App = () => (
-  <div>
-    <nav className="navbar">
-      <div className="col-md-6 offset-md-3">
-        <div><h5><em> </em> <Search /></h5></div>
+const exampleVideoDataCopy = exampleVideoData.slice();
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: exampleVideoDataCopy[0].id.videoId,
+      title: exampleVideoDataCopy[0].snippet.title,
+      description: exampleVideoDataCopy[0].snippet.description
+    };
+    this.handleClick = this.handleClick.bind(this);
+    this.videoList = <VideoList videos={exampleVideoDataCopy} handleClick={this.handleClick} />;
+  }
+
+  handleClick(e) {
+    console.log(e.target);
+
+  }
+
+
+
+
+  render() {
+    return (
+      <div>
+        <nav className="navbar">
+          <div className="col-md-6 offset-md-3">
+            <div><h5><em> </em> <Search /></h5></div>
+          </div>
+        </nav>
+        <div className="row">
+          <div className="col-md-7">
+            <div><h5><em>videoPlayer</em> <VideoPlayer videoId={this.state.value} description={this.state.description} title={this.state.title} /></h5></div>
+          </div>
+          <div className="col-md-5">
+            <div><h5><em>videoList</em> {this.videoList} </h5></div>
+          </div>
+        </div>
       </div>
-    </nav>
-    <div className="row">
-      <div className="col-md-7">
-        <div><h5><em>videoPlayer</em> <VideoPlayer video = {null}/></h5></div>
-      </div>
-      <div className="col-md-5">
-        <div><h5><em>videoList</em> <VideoList /> </h5></div>
-      </div>
-    </div>
-  </div>
-);
+    );
 
-// class App extends React.Component {
-//   constructor (props) {
-//     super (props);
-//     this.state = {
-//       value: null,
-//     };
-//   }
-//   render () {
-//     return (
-//       <
-//     )
-//   }
+  }
 
-
-
-
-//   render() {
-//     return (
-//       <div>
-//         <nav className="navbar">
-//           <div className="col-md-6 offset-md-3">
-//             <div><h5><em> </em> <Search /></h5></div>
-//           </div>
-//         </nav>
-//         <div className="row">
-//           <div className="col-md-7">
-//             <div><h5><em>videoPlayer</em> <VideoPlayer video={null} /></h5></div>
-//           </div>
-//           <div className="col-md-5">
-//             <div><h5><em>videoList</em> <VideoList /> </h5></div>
-//           </div>
-//         </div>
-//       </div>
-//     );
-//   }
-
-// }
+}
 
 
 
