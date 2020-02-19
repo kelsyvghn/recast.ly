@@ -4,21 +4,32 @@ import Search from './Search.js';
 import VideoList from './VideoList.js';
 import exampleVideoData from '/src/data/exampleVideoData.js';
 
-const exampleVideoDataCopy = exampleVideoData.slice();
 class App extends React.Component {
   constructor(props) {
     super(props);
+
+    this.exampleVideoDataCopy = exampleVideoData.slice();
     this.state = {
-      value: exampleVideoDataCopy[0].id.videoId,
-      title: exampleVideoDataCopy[0].snippet.title,
-      description: exampleVideoDataCopy[0].snippet.description
+      value: this.exampleVideoDataCopy[0].id.videoId,
+      title: this.exampleVideoDataCopy[0].snippet.title,
+      description: this.exampleVideoDataCopy[0].snippet.description
     };
     this.handleClick = this.handleClick.bind(this);
-    this.videoList = <VideoList videos={exampleVideoDataCopy} handleClick={this.handleClick} />;
+    this.videoList = <VideoList videos={this.exampleVideoDataCopy} handleClick={this.handleClick} />;
   }
 
   handleClick(e) {
-    console.log(e.target);
+
+    //exampleVideoData.findIndex()
+    var titleArray = this.exampleVideoDataCopy.map(video => video.snippet.title);
+    var getTitle = e.target.innerHTML;
+    var indexOfTitle = titleArray.indexOf(getTitle);
+    this.setState({
+      title: getTitle,
+      description: this.exampleVideoDataCopy[indexOfTitle].snippet.description,
+      value: this.exampleVideoDataCopy[indexOfTitle].id.videoId
+    });
+    // this.exampleVideoDataCopy.unshift(nowPlaying);
 
   }
 
@@ -35,10 +46,10 @@ class App extends React.Component {
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <div><h5><em>videoPlayer</em> <VideoPlayer videoId={this.state.value} description={this.state.description} title={this.state.title} /></h5></div>
+            <div><h5><em>Play</em> <VideoPlayer videoId={this.state.value} description={this.state.description} title={this.state.title} /></h5></div>
           </div>
           <div className="col-md-5">
-            <div><h5><em>videoList</em> {this.videoList} </h5></div>
+            <div><h5><em>Videos</em> {this.videoList} </h5></div>
           </div>
         </div>
       </div>
